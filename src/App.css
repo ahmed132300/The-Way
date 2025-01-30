@@ -1,0 +1,16 @@
+.Container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Blogs {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+h1 {
+  text-align: right;
+  text-decoration: double;
+}

@@ -1,0 +1,14 @@
+.slider{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+}
+.slider img {
+    border-radius: 20px;
+    width: 85%;
+    object-fit:cover;
+    border-radius: 10px;
+    height: 320px;
+}
