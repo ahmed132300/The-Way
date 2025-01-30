@@ -19,7 +19,7 @@ function Header() {
                         <li className="all-p" onClick={() => window.location.pathname = '/quran'} >القران</li>
                         <li className="accessories" onClick={() => window.location.pathname = '/hadieth'}> الحديث</li>
                         <li className="contact" onClick={() => window.location.pathname = '/sirah'}> السيرة النبوية</li>
-                        <li className="fiqh" onClick={() => window.location.pathname = '/fiqh'}> السيرة النبوية</li>
+                        <li className="fiqh" onClick={() => window.location.pathname = '/fiqh'}>الفقه</li>
                     </ul>
                     <img src={menu} onClick={() => setIsOpen(!isOpen)} className='menu' />
                 </nav>

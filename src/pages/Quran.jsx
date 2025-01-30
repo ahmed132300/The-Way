@@ -18,7 +18,7 @@ function Quran() {
             <br/>
         <div className="Blogs">
           <Blog
-            img="https://www.shutterstock.com/image-photo/holy-al-quran-written-arabic-600nw-2145394919.jpg"
+            img="https://media.elbalad.news/2024/10/large/917/4/247.jpg"
             name=" سورة الفاتحة"
             desc={`تفسير سورة الفاتحة من كتاب الظلال`}
             link="/alfateha"
