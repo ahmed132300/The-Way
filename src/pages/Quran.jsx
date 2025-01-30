@@ -2,6 +2,8 @@ import "./home.css";
 import Header from "../Components/Header";
 import Blog from "../Components/blog";
 import Imgs from "../Components/Imgs";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Show from "./Show";
 function Quran() {
   let images = [
     "https://www.shutterstock.com/image-photo/holy-al-quran-written-arabic-600nw-2145394919.jpg",
@@ -24,8 +26,16 @@ function Quran() {
             link="/alfateha"
             btn="تفسير سورة الفاتحة"
           />
+          <Blog
+            img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS19Ji4FAkNrY0LjgHvEI-aw3ohnKEU3EHag&s"
+            name=" سورة البقرة"
+            desc={`تفسير سورة البقرة من كتاب الظلال`}
+            link="/albaqara"
+            btn="تفسير سورة البقرة"
+          />
         </div>
       </div>
+
     </>
   );
 }

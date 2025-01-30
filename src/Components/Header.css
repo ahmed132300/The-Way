@@ -1,64 +1,63 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    background-color: rgb(255, 255, 255);
-    color: rgb(32, 32, 32);
-  }
-  
-  .logo {
-    font-family: cursive;
-  }
-  
-  header {
-    width: 100%;
-    padding: 18px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: -4px -1px 20px black;
-  }
-  
-  .nav {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+  color: rgb(32, 32, 32);
+}
+
+.logo {
+  font-family: cursive;
+}
+
+header {
+  width: 100%;
+  padding: 18px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: -4px -1px 20px black;
+}
+
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links li {
+  display: inline-flex;
+  list-style-type: none;
+  margin-left: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 7px;
+  border-radius: 10px;
+  color: white;
+  background-color: #270b00;
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+}
+
+.menu {
+  width: 30px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.logo {
+  width: 100px;
+  margin-left: 10px;
+  object-fit: cover;
+  height: 50px;
+}
+
+@media (max-width: 776px) {
   .links li {
-    display: inline-flex;
-    list-style-type: none;
-    margin-left: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 7px;
-    border-radius: 10px;
-    color: white;
-    background-color: rgb(95, 95, 95);
-    cursor: pointer;
-    justify-content: center;
-    text-align: center;
+    display: block;
+    margin-bottom: 3px;
   }
-  
-  .menu {
-    width: 30px;
-    object-fit: cover;
-    cursor: pointer;
-  }
-  
-  .logo {
-    width: 100px;
-    margin-left: 10px;
-    object-fit: cover;
-    height: 50px;
-  }
-  
-  @media (max-width: 776px) {
-    .links li {
-      display: block;
-      margin-bottom: 3px;
-    }
-  }
-  
+}

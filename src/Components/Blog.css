@@ -31,7 +31,7 @@ div button {
   justify-content: center;
   text-align: center;
   border: none;
-  background-color: rgb(104, 104, 104);
+  background-color: rgb(39, 19, 0);
   color: white;
   padding: 10px;
   bottom: 20px;
@@ -46,4 +46,5 @@ div button {
     align-items: center;
     justify-content: center;
     height: 100%;
+    margin-bottom: 10px;
 }

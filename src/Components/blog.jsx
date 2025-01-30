@@ -2,7 +2,7 @@ import React from "react";
 import "./Blog.css";
 export default function Blog(props) {
   return (
-    <div className="blog">
+    <div className="blog" onClick={() => window.location.pathname = props.link}>
       <div>
         <img src={props.img} alt="" srcset="" />
       </div>
