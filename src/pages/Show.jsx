@@ -9,7 +9,7 @@ function Show(props) {
       </div>
       <br />
       <div className="text">
-        <p>{props.tafseir}</p>
+        <p>{props.text}</p>
       </div>
     </>
   );
