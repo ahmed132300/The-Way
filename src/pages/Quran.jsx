@@ -22,14 +22,14 @@ function Quran() {
           <Blog
             img="https://media.elbalad.news/2024/10/large/917/4/247.jpg"
             name=" سورة الفاتحة"
-            desc={`تفسير سورة الفاتحة من كتاب الظلال`}
+            desc={`تفسير سورة الفاتحة للسعدي`}
             link="/alfateha"
             btn="تفسير سورة الفاتحة"
           />
           <Blog
             img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS19Ji4FAkNrY0LjgHvEI-aw3ohnKEU3EHag&s"
             name=" سورة البقرة"
-            desc={`تفسير سورة البقرة من كتاب الظلال`}
+            desc={`تفسير سورة البقرة السعدي  `}
             link="/albaqara"
             btn="تفسير سورة البقرة"
           />

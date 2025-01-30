@@ -13,7 +13,7 @@ function Header() {
         <>
             <header>
                 <nav className="nav">
-                    <h1 className="logo"><img src='https://www.shutterstock.com/image-vector/way-logo-negative-space-letter-260nw-2268865555.jpg' className='logo' /></h1>
+                    <h1 className="logo"><img src='https://www.shutterstock.com/image-vector/way-logo-negative-space-letter-260nw-2268865555.jpg' className='logo' onClick={() => window.location.pathname = '/home'}/></h1>
                     <ul className="links" style={{ display: isOpen ? 'block' : 'none' }}>
                         <li className="home" onClick={() => window.location.pathname = '/home'} >الرئيسية</li>
                         <li className="all-p" onClick={() => window.location.pathname = '/quran'} >القران</li>

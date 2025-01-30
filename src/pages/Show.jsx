@@ -10,7 +10,9 @@ function Show(props) {
       <br />
       <div className="text">
         <p>{props.text}</p>
+        
       </div>
+      {props.children}
     </>
   );
 }
