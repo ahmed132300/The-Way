@@ -1,7 +1,7 @@
-import "./App.css";
-import Header from "./Components/Header";
-import Blog from "./Components/blog";
-import Imgs from "./Components/Imgs";
+import "./home.css";
+import Header from "../Components/Header";
+import Blog from "../Components/blog";
+import Imgs from "../Components/Imgs";
 function Home() {
   let images = [
     "https://www.shutterstock.com/image-photo/holy-al-quran-written-arabic-600nw-2145394919.jpg",
