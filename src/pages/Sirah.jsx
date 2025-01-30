@@ -9,7 +9,7 @@ function Sirah() {
   ];
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <br/>
       <div className="Container">
             <br/>

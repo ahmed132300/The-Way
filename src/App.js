@@ -10,6 +10,7 @@ import Sirah from "./pages/Sirah";
 function App() {
   return (
     <BrowserRouter>
+    <Header/>
       <Routes>
         {/* Main Pages */}
         <Route path="/home" element={<Home />}></Route>

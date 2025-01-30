@@ -10,7 +10,7 @@ function Home() {
   ];
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {/* <Imgs images={images} /> */}
       <br/>
       <div className="Container">
