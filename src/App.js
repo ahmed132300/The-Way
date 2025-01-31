@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Quran from "./pages/Quran";
 import Sirah from "./pages/Sirah";
+import Gazwa from "./pages/gazwa";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/quran" element={<Quran />} />
         <Route path="/sirah" element={<Sirah />} />
+        <Route path="/gazwa" element={<Gazwa />} />
 
         {/* Tafseir Alquran */}
         <Route
@@ -343,6 +345,7 @@ function App() {
             </Show>
           }
         />
+        
       </Routes>
     </BrowserRouter>
   );
