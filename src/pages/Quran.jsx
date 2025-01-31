@@ -1,43 +1,853 @@
 import "./home.css";
-import Header from "../Components/Header";
 import Blog from "../Components/blog";
-import Imgs from "../Components/Imgs";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Show from "./Show";
+
+// بيانات جميع سور القرآن
+const surahs = [
+  // السور من 1 إلى 20
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الفاتحة",
+      desc: "تفسير سورة الفاتحة للسعدي",
+      link: "/alfateha",
+      btn: "تفسير سورة الفاتحة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة البقرة",
+      desc: "تفسير سورة البقرة للسعدي",
+      link: "/albaqara",
+      btn: "تفسير سورة البقرة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة آل عمران",
+      desc: "تفسير سورة آل عمران للسعدي",
+      link: "/al-imran",
+      btn: "تفسير سورة آل عمران",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة النساء",
+      desc: "تفسير سورة النساء للسعدي",
+      link: "/an-nisa",
+      btn: "تفسير سورة النساء",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة المائدة",
+      desc: "تفسير سورة المائدة للسعدي",
+      link: "/al-maidah",
+      btn: "تفسير سورة المائدة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الأنعام",
+      desc: "تفسير سورة الأنعام للسعدي",
+      link: "/al-anam",
+      btn: "تفسير سورة الأنعام",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الأعراف",
+      desc: "تفسير سورة الأعراف للسعدي",
+      link: "/al-araf",
+      btn: "تفسير سورة الأعراف",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الأنفال",
+      desc: "تفسير سورة الأنفال للسعدي",
+      link: "/al-anfal",
+      btn: "تفسير سورة الأنفال",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة التوبة",
+      desc: "تفسير سورة التوبة للسعدي",
+      link: "/at-tawbah",
+      btn: "تفسير سورة التوبة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة يونس",
+      desc: "تفسير سورة يونس للسعدي",
+      link: "/yunus",
+      btn: "تفسير سورة يونس",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة هود",
+      desc: "تفسير سورة هود للسعدي",
+      link: "/hud",
+      btn: "تفسير سورة هود",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة يوسف",
+      desc: "تفسير سورة يوسف للسعدي",
+      link: "/yusuf",
+      btn: "تفسير سورة يوسف",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الرعد",
+      desc: "تفسير سورة الرعد للسعدي",
+      link: "/ar-rad",
+      btn: "تفسير سورة الرعد",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة إبراهيم",
+      desc: "تفسير سورة إبراهيم للسعدي",
+      link: "/ibrahim",
+      btn: "تفسير سورة إبراهيم",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الحجر",
+      desc: "تفسير سورة الحجر للسعدي",
+      link: "/al-hijr",
+      btn: "تفسير سورة الحجر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة النحل",
+      desc: "تفسير سورة النحل للسعدي",
+      link: "/an-nahl",
+      btn: "تفسير سورة النحل",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الإسراء",
+      desc: "تفسير سورة الإسراء للسعدي",
+      link: "/al-isra",
+      btn: "تفسير سورة الإسراء",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الكهف",
+      desc: "تفسير سورة الكهف للسعدي",
+      link: "/al-kahf",
+      btn: "تفسير سورة الكهف",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة مريم",
+      desc: "تفسير سورة مريم للسعدي",
+      link: "/maryam",
+      btn: "تفسير سورة مريم",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة طه",
+      desc: "تفسير سورة طه للسعدي",
+      link: "/taha",
+      btn: "تفسير سورة طه",
+    },
+    // السور من 21 إلى 40
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الأنبياء",
+      desc: "تفسير سورة الأنبياء للسعدي",
+      link: "/al-anbiya",
+      btn: "تفسير سورة الأنبياء",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الحج",
+      desc: "تفسير سورة الحج للسعدي",
+      link: "/al-hajj",
+      btn: "تفسير سورة الحج",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة المؤمنون",
+      desc: "تفسير سورة المؤمنون للسعدي",
+      link: "/al-muminun",
+      btn: "تفسير سورة المؤمنون",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة النور",
+      desc: "تفسير سورة النور للسعدي",
+      link: "/an-nur",
+      btn: "تفسير سورة النور",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الفرقان",
+      desc: "تفسير سورة الفرقان للسعدي",
+      link: "/al-furqan",
+      btn: "تفسير سورة الفرقان",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الشعراء",
+      desc: "تفسير سورة الشعراء للسعدي",
+      link: "/ash-shuara",
+      btn: "تفسير سورة الشعراء",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة النمل",
+      desc: "تفسير سورة النمل للسعدي",
+      link: "/an-naml",
+      btn: "تفسير سورة النمل",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة القصص",
+      desc: "تفسير سورة القصص للسعدي",
+      link: "/al-qasas",
+      btn: "تفسير سورة القصص",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة العنكبوت",
+      desc: "تفسير سورة العنكبوت للسعدي",
+      link: "/al-ankabut",
+      btn: "تفسير سورة العنكبوت",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الروم",
+      desc: "تفسير سورة الروم للسعدي",
+      link: "/ar-rum",
+      btn: "تفسير سورة الروم",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة لقمان",
+      desc: "تفسير سورة لقمان للسعدي",
+      link: "/luqman",
+      btn: "تفسير سورة لقمان",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة السجدة",
+      desc: "تفسير سورة السجدة للسعدي",
+      link: "/as-sajdah",
+      btn: "تفسير سورة السجدة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الأحزاب",
+      desc: "تفسير سورة الأحزاب للسعدي",
+      link: "/al-ahzab",
+      btn: "تفسير سورة الأحزاب",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة سبأ",
+      desc: "تفسير سورة سبأ للسعدي",
+      link: "/saba",
+      btn: "تفسير سورة سبأ",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة فاطر",
+      desc: "تفسير سورة فاطر للسعدي",
+      link: "/fatir",
+      btn: "تفسير سورة فاطر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة يس",
+      desc: "تفسير سورة يس للسعدي",
+      link: "/yasin",
+      btn: "تفسير سورة يس",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الصافات",
+      desc: "تفسير سورة الصافات للسعدي",
+      link: "/as-saffat",
+      btn: "تفسير سورة الصافات",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة ص",
+      desc: "تفسير سورة ص للسعدي",
+      link: "/sad",
+      btn: "تفسير سورة ص",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الزمر",
+      desc: "تفسير سورة الزمر للسعدي",
+      link: "/az-zumar",
+      btn: "تفسير سورة الزمر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة غافر",
+      desc: "تفسير سورة غافر للسعدي",
+      link: "/ghafir",
+      btn: "تفسير سورة غافر",
+    },
+    // السور من 41 إلى 60
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة فصلت",
+      desc: "تفسير سورة فصلت للسعدي",
+      link: "/fussilat",
+      btn: "تفسير سورة فصلت",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الشورى",
+      desc: "تفسير سورة الشورى للسعدي",
+      link: "/ash-shura",
+      btn: "تفسير سورة الشورى",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الزخرف",
+      desc: "تفسير سورة الزخرف للسعدي",
+      link: "/az-zukhruf",
+      btn: "تفسير سورة الزخرف",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الدخان",
+      desc: "تفسير سورة الدخان للسعدي",
+      link: "/ad-dukhan",
+      btn: "تفسير سورة الدخان",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الجاثية",
+      desc: "تفسير سورة الجاثية للسعدي",
+      link: "/al-jathiyah",
+      btn: "تفسير سورة الجاثية",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الأحقاف",
+      desc: "تفسير سورة الأحقاف للسعدي",
+      link: "/al-ahqaf",
+      btn: "تفسير سورة الأحقاف",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة محمد",
+      desc: "تفسير سورة محمد للسعدي",
+      link: "/muhammad",
+      btn: "تفسير سورة محمد",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الفتح",
+      desc: "تفسير سورة الفتح للسعدي",
+      link: "/al-fath",
+      btn: "تفسير سورة الفتح",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الحجرات",
+      desc: "تفسير سورة الحجرات للسعدي",
+      link: "/al-hujurat",
+      btn: "تفسير سورة الحجرات",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة ق",
+      desc: "تفسير سورة ق للسعدي",
+      link: "/qaf",
+      btn: "تفسير سورة ق",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الذاريات",
+      desc: "تفسير سورة الذاريات للسعدي",
+      link: "/adh-dhariyat",
+      btn: "تفسير سورة الذاريات",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الطور",
+      desc: "تفسير سورة الطور للسعدي",
+      link: "/at-tur",
+      btn: "تفسير سورة الطور",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة النجم",
+      desc: "تفسير سورة النجم للسعدي",
+      link: "/an-najm",
+      btn: "تفسير سورة النجم",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة القمر",
+      desc: "تفسير سورة القمر للسعدي",
+      link: "/al-qamar",
+      btn: "تفسير سورة القمر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الرحمن",
+      desc: "تفسير سورة الرحمن للسعدي",
+      link: "/ar-rahman",
+      btn: "تفسير سورة الرحمن",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الواقعة",
+      desc: "تفسير سورة الواقعة للسعدي",
+      link: "/al-waqiah",
+      btn: "تفسير سورة الواقعة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الحديد",
+      desc: "تفسير سورة الحديد للسعدي",
+      link: "/al-hadid",
+      btn: "تفسير سورة الحديد",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة المجادلة",
+      desc: "تفسير سورة المجادلة للسعدي",
+      link: "/al-mujadilah",
+      btn: "تفسير سورة المجادلة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الحشر",
+      desc: "تفسير سورة الحشر للسعدي",
+      link: "/al-hashr",
+      btn: "تفسير سورة الحشر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الممتحنة",
+      desc: "تفسير سورة الممتحنة للسعدي",
+      link: "/al-mumtahanah",
+      btn: "تفسير سورة الممتحنة",
+    },
+    // السور من 61 إلى 80
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الصف",
+      desc: "تفسير سورة الصف للسعدي",
+      link: "/as-saff",
+      btn: "تفسير سورة الصف",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الجمعة",
+      desc: "تفسير سورة الجمعة للسعدي",
+      link: "/al-jumuah",
+      btn: "تفسير سورة الجمعة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة المنافقون",
+      desc: "تفسير سورة المنافقون للسعدي",
+      link: "/al-munafiqun",
+      btn: "تفسير سورة المنافقون",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة التغابن",
+      desc: "تفسير سورة التغابن للسعدي",
+      link: "/at-taghabun",
+      btn: "تفسير سورة التغابن",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الطلاق",
+      desc: "تفسير سورة الطلاق للسعدي",
+      link: "/at-talaq",
+      btn: "تفسير سورة الطلاق",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة التحريم",
+      desc: "تفسير سورة التحريم للسعدي",
+      link: "/at-tahrim",
+      btn: "تفسير سورة التحريم",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الملك",
+      desc: "تفسير سورة الملك للسعدي",
+      link: "/al-mulk",
+      btn: "تفسير سورة الملك",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة القلم",
+      desc: "تفسير سورة القلم للسعدي",
+      link: "/al-qalam",
+      btn: "تفسير سورة القلم",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الحاقة",
+      desc: "تفسير سورة الحاقة للسعدي",
+      link: "/al-haqqah",
+      btn: "تفسير سورة الحاقة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة المعارج",
+      desc: "تفسير سورة المعارج للسعدي",
+      link: "/al-maarij",
+      btn: "تفسير سورة المعارج",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة نوح",
+      desc: "تفسير سورة نوح للسعدي",
+      link: "/nuh",
+      btn: "تفسير سورة نوح",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الجن",
+      desc: "تفسير سورة الجن للسعدي",
+      link: "/al-jinn",
+      btn: "تفسير سورة الجن",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة المزمل",
+      desc: "تفسير سورة المزمل للسعدي",
+      link: "/al-muzzammil",
+      btn: "تفسير سورة المزمل",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة المدثر",
+      desc: "تفسير سورة المدثر للسعدي",
+      link: "/al-muddathir",
+      btn: "تفسير سورة المدثر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة القيامة",
+      desc: "تفسير سورة القيامة للسعدي",
+      link: "/al-qiyamah",
+      btn: "تفسير سورة القيامة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الإنسان",
+      desc: "تفسير سورة الإنسان للسعدي",
+      link: "/al-insan",
+      btn: "تفسير سورة الإنسان",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة المرسلات",
+      desc: "تفسير سورة المرسلات للسعدي",
+      link: "/al-mursalat",
+      btn: "تفسير سورة المرسلات",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة النبأ",
+      desc: "تفسير سورة النبأ للسعدي",
+      link: "/an-naba",
+      btn: "تفسير سورة النبأ",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة النازعات",
+      desc: "تفسير سورة النازعات للسعدي",
+      link: "/an-naziat",
+      btn: "تفسير سورة النازعات",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة عبس",
+      desc: "تفسير سورة عبس للسعدي",
+      link: "/abasa",
+      btn: "تفسير سورة عبس",
+    },
+    // السور من 81 إلى 100
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة التكوير",
+      desc: "تفسير سورة التكوير للسعدي",
+      link: "/at-takwir",
+      btn: "تفسير سورة التكوير",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الانفطار",
+      desc: "تفسير سورة الانفطار للسعدي",
+      link: "/al-infitar",
+      btn: "تفسير سورة الانفطار",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة المطففين",
+      desc: "تفسير سورة المطففين للسعدي",
+      link: "/al-mutaffifin",
+      btn: "تفسير سورة المطففين",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الانشقاق",
+      desc: "تفسير سورة الانشقاق للسعدي",
+      link: "/al-inshiqaq",
+      btn: "تفسير سورة الانشقاق",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة البروج",
+      desc: "تفسير سورة البروج للسعدي",
+      link: "/al-buruj",
+      btn: "تفسير سورة البروج",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الطارق",
+      desc: "تفسير سورة الطارق للسعدي",
+      link: "/at-tariq",
+      btn: "تفسير سورة الطارق",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الأعلى",
+      desc: "تفسير سورة الأعلى للسعدي",
+      link: "/al-ala",
+      btn: "تفسير سورة الأعلى",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الغاشية",
+      desc: "تفسير سورة الغاشية للسعدي",
+      link: "/al-ghashiyah",
+      btn: "تفسير سورة الغاشية",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الفجر",
+      desc: "تفسير سورة الفجر للسعدي",
+      link: "/al-fajr",
+      btn: "تفسير سورة الفجر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة البلد",
+      desc: "تفسير سورة البلد للسعدي",
+      link: "/al-balad",
+      btn: "تفسير سورة البلد",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الشمس",
+      desc: "تفسير سورة الشمس للسعدي",
+      link: "/ash-shams",
+      btn: "تفسير سورة الشمس",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الليل",
+      desc: "تفسير سورة الليل للسعدي",
+      link: "/al-layl",
+      btn: "تفسير سورة الليل",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الضحى",
+      desc: "تفسير سورة الضحى للسعدي",
+      link: "/ad-duha",
+      btn: "تفسير سورة الضحى",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الشرح",
+      desc: "تفسير سورة الشرح للسعدي",
+      link: "/ash-sharh",
+      btn: "تفسير سورة الشرح",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة التين",
+      desc: "تفسير سورة التين للسعدي",
+      link: "/at-tin",
+      btn: "تفسير سورة التين",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة العلق",
+      desc: "تفسير سورة العلق للسعدي",
+      link: "/al-alaq",
+      btn: "تفسير سورة العلق",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة القدر",
+      desc: "تفسير سورة القدر للسعدي",
+      link: "/al-qadr",
+      btn: "تفسير سورة القدر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة البينة",
+      desc: "تفسير سورة البينة للسعدي",
+      link: "/al-bayyinah",
+      btn: "تفسير سورة البينة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الزلزلة",
+      desc: "تفسير سورة الزلزلة للسعدي",
+      link: "/az-zalzalah",
+      btn: "تفسير سورة الزلزلة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة العاديات",
+      desc: "تفسير سورة العاديات للسعدي",
+      link: "/al-adiyat",
+      btn: "تفسير سورة العاديات",
+    },
+    // السور من 101 إلى 114
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة القارعة",
+      desc: "تفسير سورة القارعة للسعدي",
+      link: "/al-qariah",
+      btn: "تفسير سورة القارعة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة التكاثر",
+      desc: "تفسير سورة التكاثر للسعدي",
+      link: "/at-takathur",
+      btn: "تفسير سورة التكاثر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة العصر",
+      desc: "تفسير سورة العصر للسعدي",
+      link: "/al-asr",
+      btn: "تفسير سورة العصر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الهمزة",
+      desc: "تفسير سورة الهمزة للسعدي",
+      link: "/al-humazah",
+      btn: "تفسير سورة الهمزة",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الفيل",
+      desc: "تفسير سورة الفيل للسعدي",
+      link: "/al-fil",
+      btn: "تفسير سورة الفيل",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة قريش",
+      desc: "تفسير سورة قريش للسعدي",
+      link: "/quraysh",
+      btn: "تفسير سورة قريش",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الماعون",
+      desc: "تفسير سورة الماعون للسعدي",
+      link: "/al-maun",
+      btn: "تفسير سورة الماعون",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الكوثر",
+      desc: "تفسير سورة الكوثر للسعدي",
+      link: "/al-kawthar",
+      btn: "تفسير سورة الكوثر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الكافرون",
+      desc: "تفسير سورة الكافرون للسعدي",
+      link: "/al-kafirun",
+      btn: "تفسير سورة الكافرون",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة النصر",
+      desc: "تفسير سورة النصر للسعدي",
+      link: "/an-nasr",
+      btn: "تفسير سورة النصر",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة المسد",
+      desc: "تفسير سورة المسد للسعدي",
+      link: "/al-masad",
+      btn: "تفسير سورة المسد",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الإخلاص",
+      desc: "تفسير سورة الإخلاص للسعدي",
+      link: "/al-ikhlas",
+      btn: "تفسير سورة الإخلاص",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الفلق",
+      desc: "تفسير سورة الفلق للسعدي",
+      link: "/al-falaq",
+      btn: "تفسير سورة الفلق",
+    },
+    {
+      img: "https://www.aljazeera.net/wp-content/uploads/2020/05/ddd7a99b-b38e-4ba2-983e-44c0fbc6bcdd.jpeg?resize=770%2C513&quality=80",
+      name: "سورة الناس",
+      desc: "تفسير سورة الناس للسعدي",
+      link: "/al-nas",
+      btn: "تفسير سورة الناس",
+    },
+];
+
 function Quran() {
-  let images = [
-    "https://www.shutterstock.com/image-photo/holy-al-quran-written-arabic-600nw-2145394919.jpg",
-   "https://www.mominoun.com/picture/2015-10/reel/56321c0ee24fe1256500255.jpg",
-    "https://www.edu2ksa.com/wp-content/uploads/2019/07/%D8%A7%D8%B3%D8%AA%D9%85%D8%A7%D8%B1%D8%A9-%D9%85%D8%AA%D8%A7%D8%A8%D8%B9%D8%A9-%D9%85%D9%87%D8%A7%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D9%81%D9%82%D9%87-%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-%D8%A7%D9%84%D9%81%D8%B5%D9%84-%D8%A7%D9%84%D8%A7%D9%88%D9%84.jpg",
-  ];
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredSurahs = surahs.filter((surah) =>
+    surah.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
-      {/* <Header /> */}
-      {/* <Imgs images={images} /> */}
-      <br/>
+      <br />
       <div className="Container">
-            {/* <h1 >: تعلم </h1> */}
-            <br/>
-        <div className="Blogs">
-          <Blog
-            img="https://media.elbalad.news/2024/10/large/917/4/247.jpg"
-            name=" سورة الفاتحة"
-            desc={`تفسير سورة الفاتحة للسعدي`}
-            link="/alfateha"
-            btn="تفسير سورة الفاتحة"
-          />
-          <Blog
-            img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS19Ji4FAkNrY0LjgHvEI-aw3ohnKEU3EHag&s"
-            name=" سورة البقرة"
-            desc={`تفسير سورة البقرة السعدي  `}
-            link="/albaqara"
-            btn="تفسير سورة البقرة"
+        <br />
+        {/* Search Bar */}
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="ابحث عن سورة..."
+            value={searchTerm}
+            onChange={handleSearch}
           />
         </div>
+        <div className="Blogs">
+          {filteredSurahs.map((surah, index) => (
+            <Blog
+              key={index} // مفتاح فريد لكل عنصر
+              img={surah.img}
+              name={surah.name}
+              desc={surah.desc}
+              link={surah.link}
+              btn={surah.btn}
+            />
+          ))}
+        </div>
       </div>
-
     </>
   );
 }
-
 export default Quran;
