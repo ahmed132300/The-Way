@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import "./home.css";
 import Blog from "../Components/blog";
-
 // بيانات جميع سور القرآن
 const surahs = [
   // السور من 1 إلى 20
